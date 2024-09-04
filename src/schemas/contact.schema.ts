@@ -3,12 +3,12 @@ import { Document } from 'mongoose';
 
 export type ContactDocument = Contact & Document;
 
-@Schema()
+@Schema({timestamps: true})
 export class Contact {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, })
   email: string;
 
   @Prop({ required: true })
