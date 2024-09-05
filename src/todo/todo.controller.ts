@@ -120,5 +120,20 @@ import {
         }
       }
     }
+
+    @Delete("/delete-all-todos")
+    @HttpCode(200)
+    async deleteAllTodos() {
+      try {
+        const deletedTodos = await this.todoModel.deleteMany({})
+        return { message: `Deleted ${deletedTodos.deletedCount} todos!` };
+      } catch (error) {
+        if (error instanceof NotFoundException) {
+          throw error;
+        } else {
+          throw new HttpException('Internal server error', 500);
+        }
+      }
+    }
   }
   
